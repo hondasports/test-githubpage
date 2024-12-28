@@ -26,7 +26,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       - run: pnpm install
-      - run: pnpm build
+      - run: pnpm generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
