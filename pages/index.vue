@@ -1,4 +1,3 @@
-// pages/index.vue
 <template>
   <div class="grid grid-rows-layout h-screen">
     <Header />
@@ -29,9 +28,9 @@
             <h2 class="text-2xl font-bold">スキル</h2>
           </template>
           <template #content>
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6">
+            <div class="">
               <template v-for="skill in skills" :key="skill.title">
-                <SkillCard :title="skill.title" :description="skill.description" :useYear="skill.useYear" />
+                <SkillCard class="mb-4" :title="skill.title" :description="skill.description" :useYear="skill.useYear" />
               </template>
             </div>
           </template>
@@ -76,6 +75,15 @@ const skills = ref([
 import Header from '/components/Header.vue';
 import SkillCard from '/components/SkillCard.vue';
 </script>
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+section[id] {
+  scroll-margin-top: 5rem;
+}
+</style>
 
 <style scoped>
 body {

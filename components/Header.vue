@@ -1,10 +1,23 @@
 <template>
-  <header class="bg-gray-800 text-white py-4">
-    <Menubar :model="menuItems" class="container mx-auto" />
+  <header class="py-4 sticky top-0 backdrop-blur-md bg-black/0 w-full shadow-sm">
+    <Menubar :model="menuItems" class="container mx-auto">
+      <template #end>
+        <Button @click="toggleDarkMode">
+          <span class="pi" :class="isDarkMode ? 'pi-moon': 'pi-sun'"></span>
+        </Button>
+      </template>
+    </Menubar>
   </header>
 </template>
 
 <script setup>
+const toggleDarkMode = () => {
+    document.documentElement.classList.toggle('p-dark');
+    isDarkMode.value = !isDarkMode.value;
+};
+
+const isDarkMode = ref(document?.documentElement.classList.contains('p-dark'));
+
 const menuItems = [
   { label: 'トップ', command: () => document.getElementById('top').scrollIntoView() },
   { label: '自己紹介', command: () => document.getElementById('about').scrollIntoView() },
@@ -16,5 +29,11 @@ const menuItems = [
 <style scoped>
 header {
   font-family: 'Inter', sans-serif;
+}
+
+:deep(.p-menubar) {
+  background: transparent;
+  border: none;
+  /* padding: 0.5rem; */
 }
 </style>
