@@ -25,7 +25,7 @@
       <section id="skill" class="mb-12">
         <Card>
           <template #title>
-            <h2 class="text-2xl font-bold">スキル</h2>
+            <h2 class="">スキル</h2>
           </template>
           <template #content>
             <div class="">
