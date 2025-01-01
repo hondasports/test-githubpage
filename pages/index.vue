@@ -1,101 +1,113 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br ">
-    <!-- モバイル用ヘッダー -->
-    <header class="md:hidden sticky top-0 backdrop-blur-md ">
-      <Menubar :model="menuItems" class="container mx-auto">
-        <template #end>
-          <Button @click="toggleDarkMode" class="p-button-text p-button-rounded">
-            <i class="pi" :class="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-          </Button>
-        </template>
-      </Menubar>
-    </header>
+  <!-- 背景固定 + オーバーレイ -->
+  <div class="relative min-h-screen">
+    <!-- 固定背景 -->
+    <div 
+      class="fixed inset-0 bg-cover bg-center bg-no-repeat z-0"
+      style="background-image: url('/background.jpg');">
+    </div>
+    <!-- 半透明オーバーレイ -->
+    <div class="fixed inset-0 bg-black/10 backdrop-blur-sm z-0"></div>
 
-    <!-- デスクトップレイアウト -->
-    <div class="flex flex-col md:flex-row">
-      <!-- サイドメニュー（左側・デスクトップのみ） -->
-      <aside class="hidden md:block w-64 h-screen sticky top-0">
-        <div class="flex flex-col justify-center items-center h-full p-4">
-          <div class="space-y-6 w-full">
-            <Image src="/avatar.png" alt="プロフィール画像" class="w-32 h-32 rounded-full" />
-            <nav class="space-y-4">
-              <Button v-for="item in menuItems"
-                :key="item.label"
-                @click="item.command"
-                class="block w-full text-left p-3 rounded-lg transition-colors">
-                {{ item.label }}
-              </Button>
-              <Button @click="toggleDarkMode"
-                    class="w-full p-button-text p-button-rounded">
-                <i class="pi" :class="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-              </Button>
-            </nav>
-          </div>
-        </div>
-      </aside>
+    <!-- コンテンツ -->
+    <div class="relative z-10">
+      <!-- モバイル用ヘッダー -->
+      <header class="md:hidden sticky top-0 backdrop-blur-md bg-white/10">
+        <Menubar :model="menuItems" class="container mx-auto">
+          <template #end>
+            <Button @click="toggleDarkMode" class="p-button-text p-button-rounded">
+              <i class="pi" :class="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
+            </Button>
+          </template>
+        </Menubar>
+      </header>
 
-      <!-- メインコンテンツ（右側） -->
-      <main class="flex-1 p-4 md:p-8 md:h-screen md:overflow-y-auto">
-        <div class="max-w-4xl mx-auto">
-          <section id="top" class="mb-12">
-            <Card>
-              <template #title>
-                プログラミングは人生の一部
-              </template>
-              <template #content>
-                <p class="pt-4">プログラミングは人生の一部。昔、異業種への転職も含めて考えていた時に親友からスマホアプリ開発の話を受けました。 調べならが徐々にできて行くアプリに楽しさを覚え、それ以来プログラミングが楽しい事、私の人生の一部になりました。 そんな気持ちをサブタイトルに込めています。</p>
-              </template>
-            </Card>
-          </section>
-
-          <section id="about" class="mb-12">
-            <Card>
-              <template #title>自己紹介</template>
-              <template #content>
-                <p class="pt-4">工業高校時代にインターネットにのめり込み、卒業後プログラマとしてキャリアを開始。 初めて業務で先輩から教えてもらった言語はC言語とJavaを経験。 その後、外資系半導体企業で社内SEからSIerへ転職し主にJava, Perl, MFCを業務で使用。2018年中旬にメーカ系企業に転職し主にフロントエンド(PHP, Vue)を担当。 趣味は、バイクでのツーリング。月一回、仲間と関西周辺を走りに行っている。</p>
-              </template>
-            </Card>
-          </section>
-
-          <section id="skill" class="mb-12">
-            <Card>
-              <template #title>
-                <h2 class="">スキル</h2>
-              </template>
-              <template #content>
-                <div class="pt-4">
-                  <template v-for="skill in skills" :key="skill.title">
-                    <SkillCard class="mb-4" :title="skill.title" :description="skill.description" :useYear="skill.useYear" />
-                  </template>
-                </div>
-              </template>
-            </Card>
-          </section>
-
-          <section id="content" class="mb-12">
-            <Card>
-              <template #title>コンテンツ</template>
-              <template #content>
-                <ul class="mt-4">
-                  <li><strong>ニコカレ - ニコニコカレンダー</strong>: 友人の仕事がきっかけで作成したアプリ。メンテナンスをサボっていたため削除された。リンクは過去に残っていた紹介ページ。</li>
-                  <li><strong>Bun-chan-bot</strong>: ラズパイを使いたいというのと、日中部屋を留守にするのでモニタリングするために作成。</li>
-                </ul>
-              </template>
-            </Card>
-          </section>
-          <footer class="text-white py-4">
-            <div class="container mx-auto flex justify-center space-x-4">
-              <Button label="GitHub" class="p-button-text" />
-              <Button label="Facebook" class="p-button-text" />
-              <Button label="Instagram" class="p-button-text" />
-              <Button label="Qiita" class="p-button-text" />
-              <Button label="X" class="p-button-text" />
+      <!-- デスクトップレイアウト -->
+      <div class="flex flex-col md:flex-row">
+        <!-- サイドメニュー（左側・デスクトップのみ） -->
+        <aside class="hidden md:block w-64 h-screen sticky top-0">
+          <div class="flex justify-center items-center h-full p-4">
+            <div class="space-y-4 w-full">
+              <Image src="/avatar.png" alt="プロフィール画像" class="w-32 h-32 rounded-full" />
+              <nav class="space-y-4">
+                <Button v-for="item in menuItems"
+                  :key="item.label"
+                  @click="item.command"
+                  class="w-full p-2 transition-colors">
+                  {{ item.label }}
+                </Button>
+                <Button @click="toggleDarkMode"
+                      class="w-full p-button-text p-button-rounded">
+                  <i class="pi" :class="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
+                </Button>
+              </nav>
             </div>
-          </footer>
-        </div>
-      </main>
+          </div>
+        </aside>
+
+        <!-- メインコンテンツ（右側） -->
+        <main class="flex-1 p-4 md:p-8 md:h-screen md:overflow-y-auto">
+          <div class="max-w-4xl mx-auto">
+            <section id="top" class="mb-12">
+              <Card>
+                <template #title>
+                  プログラミングは人生の一部
+                </template>
+                <template #content>
+                  <p class="pt-4">プログラミングは人生の一部。昔、異業種への転職も含めて考えていた時に親友からスマホアプリ開発の話を受けました。 調べならが徐々にできて行くアプリに楽しさを覚え、それ以来プログラミングが楽しい事、私の人生の一部になりました。 そんな気持ちをサブタイトルに込めています。</p>
+                </template>
+              </Card>
+            </section>
+
+            <section id="about" class="mb-12">
+              <Card>
+                <template #title>自己紹介</template>
+                <template #content>
+                  <p class="pt-4">工業高校時代にインターネットにのめり込み、卒業後プログラマとしてキャリアを開始。 初めて業務で先輩から教えてもらった言語はC言語とJavaを経験。 その後、外資系半導体企業で社内SEからSIerへ転職し主にJava, Perl, MFCを業務で使用。2018年中旬にメーカ系企業に転職し主にフロントエンド(PHP, Vue)を担当。 趣味は、バイクでのツーリング。月一回、仲間と関西周辺を走りに行っている。</p>
+                </template>
+              </Card>
+            </section>
+
+            <section id="skill" class="mb-12">
+              <Card>
+                <template #title>
+                  <h2 class="">スキル</h2>
+                </template>
+                <template #content>
+                  <div class="pt-4">
+                    <template v-for="skill in skills" :key="skill.title">
+                      <SkillCard class="mb-4" :title="skill.title" :description="skill.description" :useYear="skill.useYear" />
+                    </template>
+                  </div>
+                </template>
+              </Card>
+            </section>
+
+            <section id="content" class="mb-12">
+              <Card>
+                <template #title>コンテンツ</template>
+                <template #content>
+                  <ul class="mt-4">
+                    <li><strong>ニコカレ - ニコニコカレンダー</strong>: 友人の仕事がきっかけで作成したアプリ。メンテナンスをサボっていたため削除された。リンクは過去に残っていた紹介ページ。</li>
+                    <li><strong>Bun-chan-bot</strong>: ラズパイを使いたいというのと、日中部屋を留守にするのでモニタリングするために作成。</li>
+                  </ul>
+                </template>
+              </Card>
+            </section>
+          </div>
+        </main>
+      </div>
     </div>
   </div>
+  <footer class="py-4">
+    <div class="container mx-auto flex justify-center space-x-4 bg-transparent">
+      <Button label="GitHub" class="p-button-text" />
+      <Button label="Facebook" class="p-button-text" />
+      <Button label="Instagram" class="p-button-text" />
+      <Button label="Qiita" class="p-button-text" />
+      <Button label="X" class="p-button-text" />
+    </div>
+  </footer>
 </template>
 
 <script setup>
