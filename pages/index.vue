@@ -2,7 +2,7 @@
   <!-- 背景固定 + オーバーレイ -->
   <div class="relative min-h-screen">
     <!-- 固定背景 -->
-    <div 
+    <div
       class="fixed inset-0 bg-cover bg-center bg-no-repeat z-0"
       style="background-image: url('/background.jpg');">
     </div>
@@ -12,7 +12,7 @@
     <!-- コンテンツ -->
     <div class="relative z-10">
       <!-- モバイル用ヘッダー -->
-      <header class="md:hidden sticky top-0 backdrop-blur-md bg-white/10">
+      <header class="md:hidden sticky top-0">
         <Menubar :model="menuItems" class="container mx-auto">
           <template #end>
             <Button @click="toggleDarkMode" class="p-button-text p-button-rounded">
@@ -33,11 +33,11 @@
                 <Button v-for="item in menuItems"
                   :key="item.label"
                   @click="item.command"
-                  class="w-full p-2 transition-colors">
+                  class="w-full p-button-text">
                   {{ item.label }}
                 </Button>
                 <Button @click="toggleDarkMode"
-                      class="w-full p-button-text p-button-rounded">
+                      class="w-full p-button-text p-button-rounded ">
                   <i class="pi" :class="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
                 </Button>
               </nav>
@@ -63,7 +63,7 @@
               <Card>
                 <template #title>自己紹介</template>
                 <template #content>
-                  <p class="pt-4">工業高校時代にインターネットにのめり込み、卒業後プログラマとしてキャリアを開始。 初めて業務で先輩から教えてもらった言語はC言語とJavaを経験。 その後、外資系半導体企業で社内SEからSIerへ転職し主にJava, Perl, MFCを業務で使用。2018年中旬にメーカ系企業に転職し主にフロントエンド(PHP, Vue)を担当。 趣味は、バイクでのツーリング。月一回、仲間と関西周辺を走りに行っている。</p>
+                  <p class="pt-4">工業高校時代にインターネットにのめり込み、卒業後プログラマとしてキャリアを開始。 初めて業務で先輩から教えてもらった言語はC言語とJavaを経験。その後、外資系半導体企業で社内SEからSIerへ転職し主にJava, Perl, MFCを業務で使用。2018年中旬にメーカ系企業に転職し主にフロントエンド(PHP, Vue)を担当。 趣味は、バイクでのツーリング。月一回、仲間と関西周辺を走りに行っている。</p>
                 </template>
               </Card>
             </section>
@@ -101,11 +101,12 @@
   </div>
   <footer class="py-4">
     <div class="container mx-auto flex justify-center space-x-4 bg-transparent">
-      <Button label="GitHub" class="p-button-text" />
-      <Button label="Facebook" class="p-button-text" />
-      <Button label="Instagram" class="p-button-text" />
-      <Button label="Qiita" class="p-button-text" />
-      <Button label="X" class="p-button-text" />
+      <Button icon="pi pi-github" class="p-button-text" as="a" href="https://github.com/hondasports" target="_blank"/>
+      <Button icon="pi pi-twitter" class="p-button-text" as="a" href="https://x.com/hondasports8" target="_blank"/>
+      <Button icon="pi pi-facebook" class="p-button-text" as="a" href="https://www.facebook.com/miyamoto.tatsuya" target="_blank"/>
+      <Button icon="pi pi-instagram" class="p-button-text" as="a" href="https://www.instagram.com/hondasports/" target="_blank"/>
+      <Button label="Qiita" class="p-button-text" as="a" href="https://qiita.com/hondasports8" target="_blank" />
+      <Button label="zenn" class="p-button-text" as="a" href="https://zenn.dev/hondasports" target="_blank" />
     </div>
   </footer>
 </template>
@@ -128,7 +129,7 @@ const menuItems = [
 const skills = ref([
   { title: 'Java', description: '業務系アプリのバックエンド開発。Oracle, MySQL, PostgreSQL を使用。J2EE を用いた API 構築で Guava や JUnit を活用。', useYear: 5 },
   { title: 'C, MFC', description: '解析アプリケーションの保守で使用。C#と接続するためにCRLを使ったりもしていた。', useYear: 3 },
-  { title: 'PHP, Vue', description: 'フロントエンド開発の主担当（PHP:2割, Vue:8割）。直近は、新規プロダクトの設定画面構築に携わり、ライブラリ選定、設計、実装を担当。使用技術: ESLint, Prettier, Vue3, vee-validate, zod, ky', useYear: 6 },
+  { title: 'PHP, Vue', description: 'フロントエンド開発の主担当（PHP:2割, Vue:8割）。直近は、新規プロダクトの設定画面構築に携わり、ライブラリ選定、設計、実装を担当。使用技術: ESLint, Prettier, Vue3, vee-validate, zod, ky, vitest', useYear: 6 },
   { title: 'Perl', description: '半導体企業でのテキスト操作で使用。現在も特定のタスクで活用。', useYear: 5 },
   { title: 'Python', description: 'Django を使った WebAPI プロトタイプ作成や、個人プロジェクト（Twitter Bot）で使用。', useYear: 1 },
 ]);
@@ -143,16 +144,5 @@ html {
 }
 section[id] {
   scroll-margin-top: 5rem;
-}
-</style>
-
-<style scoped>
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-.grid-rows-layout {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
 }
 </style>

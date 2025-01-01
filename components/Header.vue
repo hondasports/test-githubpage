@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 backdrop-blur-md bg-black/0 w-full shadow-sm">
+  <header class="sticky top-0">
     <Menubar :model="menuItems" class="container mx-auto">
       <template #end>
         <Button @click="toggleDarkMode">
