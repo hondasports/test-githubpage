@@ -1,5 +1,5 @@
 <template>
-  <header class="py-4 sticky top-0 backdrop-blur-md bg-black/0 w-full shadow-sm">
+  <header class="sticky top-0 backdrop-blur-md bg-black/0 w-full shadow-sm">
     <Menubar :model="menuItems" class="container mx-auto">
       <template #end>
         <Button @click="toggleDarkMode">
@@ -25,15 +25,3 @@ const menuItems = [
   { label: 'コンテンツ', command: () => document.getElementById('content').scrollIntoView() },
 ];
 </script>
-
-<style scoped>
-header {
-  font-family: 'Inter', sans-serif;
-}
-
-:deep(.p-menubar) {
-  background: transparent;
-  border: none;
-  /* padding: 0.5rem; */
-}
-</style>
